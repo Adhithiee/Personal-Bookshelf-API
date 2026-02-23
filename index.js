@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const requestTimer = require("./middleware/timer");
 require("dotenv").config();
 const bookRouter = require("./routes/book");
-
+const authRouter = require("./routes/auth");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -25,11 +25,14 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 
+// 3. Middlewares
 app.use(morgan("dev"));
 app.use(express.json()); // Middleware to read the data sent in the request body
 app.use(requestTimer);
 
+// 4. Routes
 app.use("/books", bookRouter);
+app.use("/auth", authRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
