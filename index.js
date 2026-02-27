@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const morgan = require("morgan");
@@ -26,6 +27,7 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 
 // 3. Middlewares
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json()); // Middleware to read the data sent in the request body
 app.use(requestTimer);

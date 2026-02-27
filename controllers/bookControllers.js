@@ -12,12 +12,12 @@ const getBooks = async (req, res, next) => {
 
 const addBook = async (req, res, next) => {
     try {
-        const { title, author, published_year, isbn } = req.body;
+        const { title, author, published_year } = req.body;
         // Basic validation
         if (!title || !author) {
             return res.status(400).json({ error: "Title and Author are required" });
         }
-        const newBook = await bookServices.addNewBook(title, author, published_year, isbn);
+        const newBook = await bookServices.addNewBook(title, author, published_year);
         res.status(201).json(newBook);
     } catch (err) {
         next(err);
@@ -40,10 +40,10 @@ const getBook = async (req, res, next) => {
 const modifyBook = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { title, author, published_year, isbn } = req.body;
+        const { title, author, published_year } = req.body;
         if (isNaN(id)) return next();
 
-        const updatedBook = await bookServices.updateBook(id, title, author, published_year, isbn);
+        const updatedBook = await bookServices.updateBook(id, title, author, published_year);
         if (!updatedBook) return res.status(404).json({ error: "Book not found" });
         res.status(200).json(updatedBook);
     } catch (err) {

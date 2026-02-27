@@ -10,10 +10,10 @@ const getAllBooks = async (search) => {
     return result.rows;
 };
 
-const addNewBook = async (title, author, published_year, isbn) => {
+const addNewBook = async (title, author, published_year) => {
     const result = await db.query(
-        'INSERT INTO books (title, author, published_year, isbn) VALUES ($1, $2, $3, $4) RETURNING *',
-        [title, author, published_year, isbn]
+        'INSERT INTO books (title, author, published_year) VALUES ($1, $2, $3) RETURNING *',
+        [title, author, published_year]
     );
     return result.rows[0];
 }
@@ -23,10 +23,10 @@ const getOneBook = async (id) => {
     return result.rows[0];
 }
 
-const updateBook = async (id, title, author, published_year, isbn) => {
+const updateBook = async (id, title, author, published_year) => {
     const result = await db.query(
-        "UPDATE books SET title = $1, author = $2, published_year = $3, isbn = $4 WHERE id = $5 RETURNING *",
-        [title, author, published_year, isbn, id]
+        "UPDATE books SET title = $1, author = $2, published_year = $3 WHERE id = $4 RETURNING *",
+        [title, author, published_year, id]
     );
     return result.rows[0];
 }
