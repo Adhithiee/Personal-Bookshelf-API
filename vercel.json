@@ -1,0 +1,14 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "client/dist",
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/books/(.*)", "destination": "/api/index.js" },
+    { "source": "/books", "destination": "/api/index.js" },
+    { "source": "/auth/(.*)", "destination": "/api/index.js" },
+    { "source": "/auth", "destination": "/api/index.js" },
+    { "source": "/api-docs/(.*)", "destination": "/api/index.js" },
+    { "source": "/api-docs", "destination": "/api/index.js" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

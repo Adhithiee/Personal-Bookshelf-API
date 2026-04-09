@@ -47,7 +47,11 @@ app.use((err, req, res, next) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-    console.log(`API Documentation available at http://localhost:${PORT}/api-docs`);
-})
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+        console.log(`API Documentation available at http://localhost:${PORT}/api-docs`);
+    });
+}
+
+module.exports = app;
